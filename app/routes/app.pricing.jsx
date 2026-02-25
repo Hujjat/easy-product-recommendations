@@ -99,34 +99,28 @@ export default function PricingPage() {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state !== "idle";
 
-  const usagePercent = limit === Infinity ? 0 : Math.round((used / limit) * 100);
   const limitDisplay = limit === Infinity ? "Unlimited" : limit.toLocaleString();
 
   return (
     <s-page heading="Pricing Plans">
       <s-section>
-        <s-card>
-          <s-box padding="base">
-            <s-stack direction="block" gap="tight">
-              <s-text variant="headingMd">Current Usage</s-text>
-              <s-text>
-                {used.toLocaleString()} / {limitDisplay} recommendations used this billing period
-              </s-text>
-              {limit !== Infinity && (
-                <s-progress-bar progress={usagePercent} />
-              )}
-              <s-text variant="bodySm" tone="subdued">
-                {limit === Infinity
-                  ? "Unlimited recommendations available"
-                  : `${(limit - used).toLocaleString()} recommendations remaining`}
-              </s-text>
-            </s-stack>
-          </s-box>
-        </s-card>
+        <s-box padding="base" border="base" borderRadius="base">
+          <s-stack direction="block" gap="small">
+            <s-heading>Current Usage</s-heading>
+            <s-text>
+              {used.toLocaleString()} / {limitDisplay} recommendations used this billing period
+            </s-text>
+            <s-text tone="neutral">
+              {limit === Infinity
+                ? "Unlimited recommendations available"
+                : `${(limit - used).toLocaleString()} recommendations remaining`}
+            </s-text>
+          </s-stack>
+        </s-box>
       </s-section>
 
       <s-section>
-        <s-stack direction="inline" gap="base" wrap>
+        <s-stack direction="inline" gap="base">
           {plans.map((plan) => {
             const isCurrent = currentPlan === plan.name;
             const isUpgrade =
@@ -137,57 +131,55 @@ export default function PricingPage() {
               plans.findIndex((p) => p.name === currentPlan);
 
             return (
-              <s-card key={plan.name}>
-                <s-box padding="base" minWidth="250px">
-                  <s-stack direction="block" gap="base">
-                    <s-stack direction="block" gap="tight">
-                      <s-stack direction="inline" gap="tight" align="center">
-                        <s-text variant="headingLg">{plan.name}</s-text>
-                        {isCurrent && <s-badge tone="success">Current Plan</s-badge>}
-                      </s-stack>
-                      <s-text variant="headingXl">
-                        ${plan.price}
-                        <s-text variant="bodySm" tone="subdued">/month</s-text>
-                      </s-text>
+              <s-box key={plan.name} padding="base" border="base" borderRadius="base" minInlineSize="250px">
+                <s-stack direction="block" gap="base">
+                  <s-stack direction="block" gap="small">
+                    <s-stack direction="inline" gap="small">
+                      <s-heading>{plan.name}</s-heading>
+                      {isCurrent && <s-badge tone="success">Current Plan</s-badge>}
                     </s-stack>
-
-                    <s-divider />
-
-                    <s-stack direction="block" gap="tight">
-                      {plan.features.map((feature, i) => (
-                        <s-stack key={i} direction="inline" gap="tight" align="start">
-                          <s-text tone="success">&#10003;</s-text>
-                          <s-text>{feature}</s-text>
-                        </s-stack>
-                      ))}
+                    <s-stack direction="inline" gap="small">
+                      <s-heading>${plan.price}</s-heading>
+                      <s-text tone="neutral">/month</s-text>
                     </s-stack>
-
-                    <s-box paddingBlockStart="base">
-                      {isCurrent ? (
-                        <s-button disabled fullWidth>
-                          Current Plan
-                        </s-button>
-                      ) : isUpgrade ? (
-                        <fetcher.Form method="POST">
-                          <input type="hidden" name="intent" value="subscribe" />
-                          <input type="hidden" name="plan" value={plan.name} />
-                          <s-button variant="primary" fullWidth disabled={isSubmitting} type="submit">
-                            Upgrade to {plan.name}
-                          </s-button>
-                        </fetcher.Form>
-                      ) : isDowngrade ? (
-                        <fetcher.Form method="POST">
-                          <input type="hidden" name="intent" value={plan.name === FREE_PLAN ? "cancel" : "subscribe"} />
-                          <input type="hidden" name="plan" value={plan.name} />
-                          <s-button fullWidth disabled={isSubmitting} type="submit">
-                            Downgrade to {plan.name}
-                          </s-button>
-                        </fetcher.Form>
-                      ) : null}
-                    </s-box>
                   </s-stack>
-                </s-box>
-              </s-card>
+
+                  <s-divider />
+
+                  <s-stack direction="block" gap="base">
+                    {plan.features.map((feature, i) => (
+                      <s-stack key={i} direction="inline" gap="small">
+                        <s-text tone="success">&#10003;</s-text>
+                        <s-text>{feature}</s-text>
+                      </s-stack>
+                    ))}
+                  </s-stack>
+
+                  <s-box paddingBlockStart="base">
+                    {isCurrent ? (
+                      <s-button disabled>
+                        Current Plan
+                      </s-button>
+                    ) : isUpgrade ? (
+                      <fetcher.Form method="POST">
+                        <input type="hidden" name="intent" value="subscribe" />
+                        <input type="hidden" name="plan" value={plan.name} />
+                        <s-button variant="primary" disabled={isSubmitting} type="submit">
+                          Upgrade to {plan.name}
+                        </s-button>
+                      </fetcher.Form>
+                    ) : isDowngrade ? (
+                      <fetcher.Form method="POST">
+                        <input type="hidden" name="intent" value={plan.name === FREE_PLAN ? "cancel" : "subscribe"} />
+                        <input type="hidden" name="plan" value={plan.name} />
+                        <s-button disabled={isSubmitting} type="submit">
+                          Downgrade to {plan.name}
+                        </s-button>
+                      </fetcher.Form>
+                    ) : null}
+                  </s-box>
+                </s-stack>
+              </s-box>
             );
           })}
         </s-stack>
