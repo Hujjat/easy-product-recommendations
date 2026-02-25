@@ -1,11 +1,6 @@
 import { useFetcher, useLoaderData } from "react-router";
-import {
-  authenticate,
-  STANDARD_PLAN,
-  ENTERPRISE_PLAN,
-  FREE_PLAN,
-  PLAN_LIMITS,
-} from "../shopify.server";
+import { authenticate } from "../shopify.server";
+import { FREE_PLAN, STANDARD_PLAN, ENTERPRISE_PLAN, PLAN_LIMITS } from "../constants";
 import {
   getCurrentPlan,
   checkUsageLimit,

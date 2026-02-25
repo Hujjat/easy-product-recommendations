@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router";
-import { authenticate, PLAN_LIMITS } from "../shopify.server";
+import { authenticate } from "../shopify.server";
+import { PLAN_LIMITS } from "../constants";
 import { getCurrentPlan, checkUsageLimit, getOrCreateShop } from "../utils/billing.server";
 import { getAnalyticsSummary } from "../utils/metaobjects.server";
 import prisma from "../db.server";

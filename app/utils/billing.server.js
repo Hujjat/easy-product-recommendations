@@ -1,9 +1,4 @@
-import {
-  FREE_PLAN,
-  STANDARD_PLAN,
-  ENTERPRISE_PLAN,
-  PLAN_LIMITS,
-} from "../shopify.server";
+import { FREE_PLAN, STANDARD_PLAN, ENTERPRISE_PLAN, PLAN_LIMITS } from "../constants";
 
 const BILLING_CYCLE_DAYS = 30;
 

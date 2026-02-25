@@ -7,16 +7,9 @@ import {
 } from "@shopify/shopify-app-react-router/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
+import { FREE_PLAN, STANDARD_PLAN, ENTERPRISE_PLAN, PLAN_LIMITS } from "./constants";
 
-export const FREE_PLAN = "Free";
-export const STANDARD_PLAN = "Standard";
-export const ENTERPRISE_PLAN = "Enterprise";
-
-export const PLAN_LIMITS = {
-  [FREE_PLAN]: 100,
-  [STANDARD_PLAN]: 1000,
-  [ENTERPRISE_PLAN]: Infinity,
-};
+export { FREE_PLAN, STANDARD_PLAN, ENTERPRISE_PLAN, PLAN_LIMITS };
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
