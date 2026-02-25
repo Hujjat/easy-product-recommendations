@@ -32,3 +32,12 @@ model Session {
   refreshToken        String?
   refreshTokenExpires DateTime?
 }
+
+model Shop {
+  id                  String   @id // myshopify domain
+  plan                String   @default("free")
+  recommendationsUsed Int      @default(0)
+  billingCycleStart   DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

@@ -1,0 +1,31 @@
+api_version = "2026-04"
+
+[[extensions]]
+name = "Checkout Recommendations"
+handle = "checkout-recommendations"
+uid = "d296a286-e696-6ece-36cc-64f3fd7b258c5b2b48b8"
+type = "ui_extension"
+
+[extensions.capabilities]
+api_access = true
+
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
+
+[settings]
+[[settings.fields]]
+key = "heading"
+type = "single_line_text_field"
+name = "Heading"
+description = "Heading text for the recommendation section"
+
+[[settings.fields]]
+key = "products_to_show"
+type = "number_integer"
+name = "Number of products to show"
+
+[[settings.fields]]
+key = "show_price"
+type = "boolean"
+name = "Show price"

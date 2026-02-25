@@ -1,0 +1,9 @@
+api_version = "2026-04"
+uid = "727d8daa-f447-fcaf-66f1-034f50dae57577993701"
+type = "theme"
+name = "Product Recommendations"
+
+[[extensions]]
+name = "Product Recommendations"
+handle = "product-recommendations"
+type = "theme"

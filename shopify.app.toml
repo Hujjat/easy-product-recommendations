@@ -21,8 +21,64 @@ api_version = "2026-04"
   uri = "/webhooks/app/scopes_update"
 
 [access_scopes]
-# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "read_products,write_products,read_metaobject_definitions,write_metaobject_definitions,read_metaobjects,write_metaobjects"
 
 [auth]
 redirect_urls = [ "https://example.com/api/auth" ]
+
+[app_proxy]
+url = "/proxy/recommendations"
+prefix = "apps"
+subpath = "easy-recs"
+
+# ── Metaobject: Custom Recommendations ────────────────────
+[metaobjects.app.recommendation]
+name = "Product Recommendation"
+access.admin = "merchant_read_write"
+access.storefront = "public_read"
+
+[metaobjects.app.recommendation.fields.source_product]
+name = "Source Product"
+type = "product_reference"
+
+[metaobjects.app.recommendation.fields.recommended_products]
+name = "Recommended Products"
+type = "list.product_reference"
+
+[metaobjects.app.recommendation.fields.priority]
+name = "Priority"
+type = "number_integer"
+
+[metaobjects.app.recommendation.fields.is_active]
+name = "Active"
+type = "boolean"
+
+# ── Metaobject: Recommendation Analytics ──────────────────
+[metaobjects.app.recommendation_analytics]
+name = "Recommendation Analytics"
+access.admin = "merchant_read_write"
+access.storefront = "public_read"
+
+[metaobjects.app.recommendation_analytics.fields.source_product_id]
+name = "Source Product ID"
+type = "single_line_text_field"
+
+[metaobjects.app.recommendation_analytics.fields.recommended_product_id]
+name = "Recommended Product ID"
+type = "single_line_text_field"
+
+[metaobjects.app.recommendation_analytics.fields.event_type]
+name = "Event Type"
+type = "single_line_text_field"
+
+[metaobjects.app.recommendation_analytics.fields.event_date]
+name = "Event Date"
+type = "date"
+
+[metaobjects.app.recommendation_analytics.fields.count]
+name = "Count"
+type = "number_integer"
+
+[metaobjects.app.recommendation_analytics.fields.shop_domain]
+name = "Shop Domain"
+type = "single_line_text_field"

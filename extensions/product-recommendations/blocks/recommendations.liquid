@@ -1,0 +1,108 @@
+<div
+  class="easy-recs"
+  data-layout="{{ block.settings.layout }}"
+  data-product-id="{{ product.id }}"
+  data-limit="{{ block.settings.products_to_show }}"
+  data-show-atc="{{ block.settings.show_add_to_cart }}"
+  data-show-price="{{ block.settings.show_price }}"
+  data-show-vendor="{{ block.settings.show_vendor }}"
+  data-proxy-path="/apps/easy-recs"
+  style="
+    --easy-recs-bg: {{ block.settings.background_color }};
+    --easy-recs-heading-color: {{ block.settings.heading_color }};
+    --easy-recs-btn-bg: {{ block.settings.button_color }};
+    --easy-recs-btn-text: {{ block.settings.button_text_color }};
+    --easy-recs-card-bg: {{ block.settings.card_background_color }};
+  "
+>
+  <h2 class="easy-recs__heading">{{ block.settings.heading }}</h2>
+  <div class="easy-recs__container easy-recs__{{ block.settings.layout }}">
+    <div class="easy-recs__loading">Loading recommendations...</div>
+  </div>
+</div>
+
+{{ 'recommendations.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'recommendations.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product Recommendations",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "slider", "label": "Slider" },
+        { "value": "list", "label": "List" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background color",
+      "default": "#f9f9f9"
+    }
+  ]
+}
+{% endschema %}

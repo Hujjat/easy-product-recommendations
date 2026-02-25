@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "Shop" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "plan" TEXT NOT NULL DEFAULT 'free',
+    "recommendationsUsed" INTEGER NOT NULL DEFAULT 0,
+    "billingCycleStart" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);

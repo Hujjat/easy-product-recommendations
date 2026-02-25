@@ -1,0 +1,9 @@
+{
+  "name": "checkout-recommendations",
+  "private": true,
+  "dependencies": {
+    "@shopify/ui-extensions": "2026.1.2",
+    "@preact/signals": "^1.2.0",
+    "preact": "^10.19.0"
+  }
+}
