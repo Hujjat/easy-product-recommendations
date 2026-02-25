@@ -30,90 +30,113 @@ export default function DashboardPage() {
   return (
     <s-page heading="Dashboard">
       <s-section heading="Overview">
-        <s-stack direction="inline" gap="base" wrap>
-          <s-card>
-            <s-box padding="base" minWidth="200px">
-              <s-stack direction="block" gap="tight">
-                <s-text tone="subdued">Current Plan</s-text>
-                <s-text variant="headingXl">{currentPlan}</s-text>
-                <s-link href="/app/pricing">
-                  {currentPlan === "Free" ? "Upgrade" : "Manage Plan"}
-                </s-link>
-              </s-stack>
-            </s-box>
-          </s-card>
+        <s-grid gridTemplateColumns="repeat(5, 1fr)" gap="base">
+          <s-box
+            padding="large"
+            background="base"
+            border="base"
+            borderRadius="base"
+          >
+            <s-stack gap="small">
+              <s-paragraph color="subdued">Current Plan</s-paragraph>
+              <s-heading>{currentPlan}</s-heading>
+              <s-link href="/app/pricing">
+                {currentPlan === "Free" ? "Upgrade" : "Manage Plan"}
+              </s-link>
+            </s-stack>
+          </s-box>
 
-          <s-card>
-            <s-box padding="base" minWidth="200px">
-              <s-stack direction="block" gap="tight">
-                <s-text tone="subdued">Usage This Period</s-text>
-                <s-text variant="headingXl">
-                  {usage.used.toLocaleString()} / {limitDisplay}
-                </s-text>
-                {usage.limit !== Infinity && (
-                  <s-progress-bar progress={usagePercent} />
-                )}
-                <s-text variant="bodySm" tone="subdued">
-                  {usage.remaining === Infinity
-                    ? "Unlimited remaining"
-                    : `${usage.remaining.toLocaleString()} remaining`}
-                </s-text>
-              </s-stack>
-            </s-box>
-          </s-card>
+          <s-box
+            padding="large"
+            background="base"
+            border="base"
+            borderRadius="base"
+          >
+            <s-stack gap="small">
+              <s-paragraph color="subdued">Usage This Period</s-paragraph>
+              <s-heading>
+                {usage.used.toLocaleString()} / {limitDisplay}
+              </s-heading>
+              <s-paragraph color="subdued">
+                {usage.remaining === Infinity
+                  ? "Unlimited remaining"
+                  : `${usage.remaining.toLocaleString()} remaining`}
+              </s-paragraph>
+            </s-stack>
+          </s-box>
 
-          <s-card>
-            <s-box padding="base" minWidth="200px">
-              <s-stack direction="block" gap="tight">
-                <s-text tone="subdued">Impressions (30d)</s-text>
-                <s-text variant="headingXl">
+          <s-box
+            padding="large"
+            background="base"
+            border="base"
+            borderRadius="base"
+          >
+            <s-stack gap="small">
+              <s-paragraph color="subdued">Impressions (30d)</s-paragraph>
+              <s-heading>
+                <s-text fontVariantNumeric="tabular-nums">
                   {analytics.last30Days.impressions.toLocaleString()}
                 </s-text>
-                <s-text variant="bodySm" tone="subdued">
-                  {analytics.allTime.impressions.toLocaleString()} all time
-                </s-text>
-              </s-stack>
-            </s-box>
-          </s-card>
+              </s-heading>
+              <s-paragraph color="subdued">
+                {analytics.allTime.impressions.toLocaleString()} all time
+              </s-paragraph>
+            </s-stack>
+          </s-box>
 
-          <s-card>
-            <s-box padding="base" minWidth="200px">
-              <s-stack direction="block" gap="tight">
-                <s-text tone="subdued">Clicks (30d)</s-text>
-                <s-text variant="headingXl">
+          <s-box
+            padding="large"
+            background="base"
+            border="base"
+            borderRadius="base"
+          >
+            <s-stack gap="small">
+              <s-paragraph color="subdued">Clicks (30d)</s-paragraph>
+              <s-heading>
+                <s-text fontVariantNumeric="tabular-nums">
                   {analytics.last30Days.clicks.toLocaleString()}
                 </s-text>
-                <s-text variant="bodySm" tone="subdued">
-                  {analytics.allTime.clicks.toLocaleString()} all time
-                </s-text>
-              </s-stack>
-            </s-box>
-          </s-card>
+              </s-heading>
+              <s-paragraph color="subdued">
+                {analytics.allTime.clicks.toLocaleString()} all time
+              </s-paragraph>
+            </s-stack>
+          </s-box>
 
-          <s-card>
-            <s-box padding="base" minWidth="200px">
-              <s-stack direction="block" gap="tight">
-                <s-text tone="subdued">Add to Carts (30d)</s-text>
-                <s-text variant="headingXl">
+          <s-box
+            padding="large"
+            background="base"
+            border="base"
+            borderRadius="base"
+          >
+            <s-stack gap="small">
+              <s-paragraph color="subdued">Add to Carts (30d)</s-paragraph>
+              <s-heading>
+                <s-text fontVariantNumeric="tabular-nums">
                   {analytics.last30Days.addToCarts.toLocaleString()}
                 </s-text>
-                <s-text variant="bodySm" tone="subdued">
-                  {analytics.allTime.addToCarts.toLocaleString()} all time
-                </s-text>
-              </s-stack>
-            </s-box>
-          </s-card>
-        </s-stack>
+              </s-heading>
+              <s-paragraph color="subdued">
+                {analytics.allTime.addToCarts.toLocaleString()} all time
+              </s-paragraph>
+            </s-stack>
+          </s-box>
+        </s-grid>
       </s-section>
 
       {analytics.last30Days.clicks > 0 && (
-        <s-section heading="Conversion Rate (30d)">
-          <s-card>
-            <s-box padding="base">
-              <s-stack direction="inline" gap="loose" wrap>
-                <s-stack direction="block" gap="tight">
-                  <s-text tone="subdued">Click Rate</s-text>
-                  <s-text variant="headingLg">
+        <s-section heading="Conversion Rates (30d)">
+          <s-grid gridTemplateColumns="repeat(2, 1fr)" gap="base">
+            <s-box
+              padding="large"
+              background="base"
+              border="base"
+              borderRadius="base"
+            >
+              <s-stack gap="small">
+                <s-paragraph color="subdued">Click Rate</s-paragraph>
+                <s-heading>
+                  <s-text fontVariantNumeric="tabular-nums">
                     {analytics.last30Days.impressions > 0
                       ? (
                           (analytics.last30Days.clicks /
@@ -123,13 +146,21 @@ export default function DashboardPage() {
                       : 0}
                     %
                   </s-text>
-                  <s-text variant="bodySm" tone="subdued">
-                    Clicks / Impressions
-                  </s-text>
-                </s-stack>
-                <s-stack direction="block" gap="tight">
-                  <s-text tone="subdued">Cart Rate</s-text>
-                  <s-text variant="headingLg">
+                </s-heading>
+                <s-paragraph color="subdued">Clicks / Impressions</s-paragraph>
+              </s-stack>
+            </s-box>
+
+            <s-box
+              padding="large"
+              background="base"
+              border="base"
+              borderRadius="base"
+            >
+              <s-stack gap="small">
+                <s-paragraph color="subdued">Cart Rate</s-paragraph>
+                <s-heading>
+                  <s-text fontVariantNumeric="tabular-nums">
                     {analytics.last30Days.clicks > 0
                       ? (
                           (analytics.last30Days.addToCarts /
@@ -139,87 +170,68 @@ export default function DashboardPage() {
                       : 0}
                     %
                   </s-text>
-                  <s-text variant="bodySm" tone="subdued">
-                    Add to Carts / Clicks
-                  </s-text>
-                </s-stack>
+                </s-heading>
+                <s-paragraph color="subdued">
+                  Add to Carts / Clicks
+                </s-paragraph>
               </s-stack>
             </s-box>
-          </s-card>
+          </s-grid>
         </s-section>
       )}
 
       <s-section heading="Top Recommended Products">
         {analytics.topProducts.length === 0 ? (
-          <s-card>
-            <s-box padding="loose">
-              <s-stack direction="block" gap="tight" align="center">
-                <s-text tone="subdued">
-                  No recommendation data yet. Once customers start interacting
-                  with recommendations on your store, analytics will appear here.
-                </s-text>
-                <s-link href="/app/how-to-use">
-                  Learn how to set up recommendations
-                </s-link>
-              </s-stack>
-            </s-box>
-          </s-card>
+          <s-box padding="large">
+            <s-stack gap="base">
+              <s-paragraph color="subdued">
+                No recommendation data yet. Once customers start interacting
+                with recommendations on your store, analytics will appear here.
+              </s-paragraph>
+              <s-link href="/app/how-to-use">
+                Learn how to set up recommendations
+              </s-link>
+            </s-stack>
+          </s-box>
         ) : (
-          <s-card>
-            <s-box padding="base">
-              <s-stack direction="block" gap="tight">
-                <s-stack direction="inline" gap="base">
-                  <s-box minWidth="60px">
-                    <s-text variant="headingSm" tone="subdued">Rank</s-text>
-                  </s-box>
-                  <s-box style={{ flex: 1 }}>
-                    <s-text variant="headingSm" tone="subdued">Product ID</s-text>
-                  </s-box>
-                  <s-box minWidth="80px">
-                    <s-text variant="headingSm" tone="subdued">Clicks</s-text>
-                  </s-box>
-                </s-stack>
-                <s-divider />
+          <s-section padding="none">
+            <s-table>
+              <s-table-header-row>
+                <s-table-header listSlot="primary">Rank</s-table-header>
+                <s-table-header listSlot="labeled">Product ID</s-table-header>
+                <s-table-header listSlot="inline">Clicks</s-table-header>
+              </s-table-header-row>
+              <s-table-body>
                 {analytics.topProducts.map((product, index) => (
-                  <s-stack key={product.productId} direction="inline" gap="base">
-                    <s-box minWidth="60px">
-                      <s-text variant="headingSm">#{index + 1}</s-text>
-                    </s-box>
-                    <s-box style={{ flex: 1 }}>
-                      <s-text>{product.productId}</s-text>
-                    </s-box>
-                    <s-box minWidth="80px">
-                      <s-text>{product.clicks.toLocaleString()}</s-text>
-                    </s-box>
-                  </s-stack>
+                  <s-table-row key={product.productId}>
+                    <s-table-cell>
+                      <s-text type="strong">#{index + 1}</s-text>
+                    </s-table-cell>
+                    <s-table-cell>{product.productId}</s-table-cell>
+                    <s-table-cell>
+                      <s-text fontVariantNumeric="tabular-nums">
+                        {product.clicks.toLocaleString()}
+                      </s-text>
+                    </s-table-cell>
+                  </s-table-row>
                 ))}
-              </s-stack>
-            </s-box>
-          </s-card>
+              </s-table-body>
+            </s-table>
+          </s-section>
         )}
       </s-section>
 
       <s-section heading="Quick Start">
-        <s-card>
-          <s-box padding="base">
-            <s-stack direction="block" gap="tight">
-              <s-text variant="headingSm">
-                Get started with product recommendations
-              </s-text>
-              <s-stack direction="inline" gap="tight" wrap>
-                <s-link href="/app/how-to-use">
-                  <s-button>How to Use Guide</s-button>
-                </s-link>
-                <s-link href="/app/recommendations">
-                  <s-button>Manage Recommendations</s-button>
-                </s-link>
-                <s-link href="/app/pricing">
-                  <s-button>View Plans</s-button>
-                </s-link>
-              </s-stack>
-            </s-stack>
-          </s-box>
-        </s-card>
+        <s-paragraph>
+          Get started with product recommendations
+        </s-paragraph>
+        <s-stack direction="inline" gap="base">
+          <s-button href="/app/how-to-use">How to Use Guide</s-button>
+          <s-button href="/app/recommendations">
+            Manage Recommendations
+          </s-button>
+          <s-button href="/app/pricing">View Plans</s-button>
+        </s-stack>
       </s-section>
     </s-page>
   );
