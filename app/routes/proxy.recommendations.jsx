@@ -1,7 +1,6 @@
 import { authenticate } from "../shopify.server";
 import { getCustomRecommendations, upsertAnalyticsEntry } from "../utils/metaobjects.server";
 import { checkUsageLimit, incrementUsage, getOrCreateShop } from "../utils/billing.server";
-import { getCurrentPlan } from "../utils/billing.server";
 import prisma from "../db.server";
 
 export const loader = async ({ request }) => {

@@ -100,6 +100,7 @@ export async function getCustomRecommendations(admin, productId) {
                       id
                       title
                       handle
+                      vendor
                       featuredImage { url altText }
                       priceRange {
                         minVariantPrice { amount currencyCode }
@@ -140,9 +141,24 @@ export async function getCustomRecommendations(admin, productId) {
 
   if (matching.length === 0) return [];
 
-  return matching[0].node.recommended_products?.references?.edges.map(
-    (e) => e.node,
-  ) || [];
+  return matching[0].node.recommended_products?.references?.edges.map((e) => {
+    const node = e.node;
+    const variantGid = node.variants?.edges?.[0]?.node?.id;
+    return {
+      id: node.id,
+      title: node.title,
+      handle: node.handle,
+      url: "/products/" + node.handle,
+      image: node.featuredImage?.url || "",
+      featuredImage: node.featuredImage,
+      priceRange: node.priceRange,
+      priceFormatted: node.priceRange?.minVariantPrice
+        ? "$" + parseFloat(node.priceRange.minVariantPrice.amount).toFixed(2)
+        : "",
+      vendor: node.vendor || "",
+      variantId: variantGid ? variantGid.replace("gid://shopify/ProductVariant/", "") : null,
+    };
+  }) || [];
 }
 
 export async function upsertRecommendation(admin, { handle, sourceProductId, recommendedProductIds, priority, isActive }) {

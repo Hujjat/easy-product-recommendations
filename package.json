@@ -24,6 +24,7 @@
     "node": ">=20.19 <22 || >=22.12"
   },
   "dependencies": {
+    "@flydotio/litestream": "^1.0.1",
     "@prisma/client": "^6.16.3",
     "@react-router/dev": "^7.12.0",
     "@react-router/fs-routes": "^7.12.0",
@@ -40,6 +41,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10",
     "@shopify/api-codegen-preset": "^1.2.0",
     "@shopify/polaris-types": "^1.0.1",
     "@types/eslint": "^9.6.1",
@@ -68,5 +70,8 @@
   "overrides": {
     "p-map": "^4.0.0"
   },
-  "author": "hujjat"
+  "author": "hujjat",
+  "dockerfile": {
+    "litestream": true
+  }
 }
