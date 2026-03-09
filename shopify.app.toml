@@ -7,35 +7,23 @@ embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
-include_config_on_deploy = true
 
 [webhooks]
 api_version = "2026-04"
 
-  [[webhooks.subscriptions]]
-  topics = [ "app/uninstalled" ]
-  uri = "/webhooks/app/uninstalled"
-
-  [[webhooks.subscriptions]]
-  topics = [ "app/scopes_update" ]
-  uri = "/webhooks/app/scopes_update"
-
 [access_scopes]
-scopes = "read_products,write_products,read_metaobject_definitions,write_metaobject_definitions,read_metaobjects,write_metaobjects"
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,write_metaobject_definitions"
 
 [auth]
 redirect_urls = [ "https://example.com/api/auth" ]
 
-[app_proxy]
-url = "/proxy/recommendations"
-prefix = "apps"
-subpath = "easy-recs"
-
-# ── Metaobject: Custom Recommendations ────────────────────
 [metaobjects.app.recommendation]
 name = "Product Recommendation"
-access.admin = "merchant_read_write"
-access.storefront = "public_read"
+
+  [metaobjects.app.recommendation.access]
+  admin = "merchant_read_write"
+  storefront = "public_read"
 
 [metaobjects.app.recommendation.fields.source_product]
 name = "Source Product"
@@ -53,11 +41,12 @@ type = "number_integer"
 name = "Active"
 type = "boolean"
 
-# ── Metaobject: Recommendation Analytics ──────────────────
 [metaobjects.app.recommendation_analytics]
 name = "Recommendation Analytics"
-access.admin = "merchant_read_write"
-access.storefront = "public_read"
+
+  [metaobjects.app.recommendation_analytics.access]
+  admin = "merchant_read_write"
+  storefront = "public_read"
 
 [metaobjects.app.recommendation_analytics.fields.source_product_id]
 name = "Source Product ID"
