@@ -2,7 +2,7 @@
 
 client_id = "d3c0cbf098724f9889fd29eefdbce6e2"
 name = "Easy Product Recommendations"
-application_url = "https://example.com"
+application_url = "https://easy-product-recommendations-bold-waterfall-5151.fly.dev"
 embedded = true
 
 [build]
@@ -18,7 +18,7 @@ api_version = "2026-04"
 scopes = "write_metaobject_definitions,write_products,read_metaobject_definitions,read_metaobjects,write_metaobjects"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://easy-product-recommendations-bold-waterfall-5151.fly.dev/api/auth" ]
 
 
 [metaobjects.app.recommendation]
