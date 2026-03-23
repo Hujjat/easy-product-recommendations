@@ -1,33 +1,22 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "d3c0cbf098724f9889fd29eefdbce6e2"
-name = "Easy Product Recommendations"
-application_url = "https://easy-product-recommendations.fly.dev"
+client_id = "0bd89d7da3af231b79c0c6e04276d53c"
+name = "Easy Product - dev"
+application_url = "https://example.com"
 embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
 
-[app_proxy]
-url = "https://easy-product-recommendations.fly.dev"
-subpath = "recommendations"
-prefix = "apps"
-
-
 [webhooks]
 api_version = "2026-04"
-
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_metaobject_definitions,write_products,read_metaobject_definitions,read_metaobjects,write_metaobjects"
 
 [auth]
-redirect_urls = [
-  "https://easy-product-recommendations.fly.dev/auth/callback",
-  "https://easy-product-recommendations.fly.dev/auth/shopify/callback",
-  "https://easy-product-recommendations.fly.dev/api/auth/callback"
-]
+redirect_urls = [ "https://example.com/api/auth" ]
 
 
 [metaobjects.app.recommendation]
@@ -83,3 +72,4 @@ type = "number_integer"
 [metaobjects.app.recommendation_analytics.fields.shop_domain]
 name = "Shop Domain"
 type = "single_line_text_field"
+
